@@ -1,0 +1,16 @@
+<nb-layout>
+  <nb-layout-header>
+      <nb-action icon="grid-outline" (click)="toggle()"></nb-action>
+  </nb-layout-header>
+  <nb-sidebar left tag="left">
+      <nb-layout-column>
+              <nb-menu [items]="items">
+              </nb-menu>
+      </nb-layout-column>
+  </nb-sidebar>
+  <nb-layout-column>
+
+      <router-outlet></router-outlet>
+
+  </nb-layout-column>
+</nb-layout>

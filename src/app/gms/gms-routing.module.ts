@@ -5,16 +5,17 @@ import {MapComponent} from "./map/map.component";
 import {NbSidebarModule} from "@nebular/theme";
 
 const routes: Routes = [
+  
   {
-    path:"",
+    path:'',
     component: LayoutComponent,
-    children: [
+    children:[
       {
-        path: "map",
+        path: 'map',
         component: MapComponent
       }
     ]
-  }
+  },  
 ];
 
 @NgModule({

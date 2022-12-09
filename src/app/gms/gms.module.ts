@@ -1,32 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { GmsRoutingModule } from './gms-routing.module';
-import { FooterComponent } from './layout/footer/footer.component';
-import { MenuComponent } from './layout/menu/menu.component';
 import { MapComponent } from './map/map.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {LayoutComponent} from "./layout/layout.component";
 import {
   NbActionsModule,
   NbButtonModule,
+  NbCardModule,
   NbLayoutModule,
   NbMenuModule,
   NbSidebarModule,
-  NbUserModule
+  NbUserModule,
+  
 } from "@nebular/theme";
-import {SidebarComponent} from "./layout/sidebar/sidebar.component";
-
-
 @NgModule({
   declarations: [
     LayoutComponent,
-    FooterComponent,
-    MenuComponent,
     MapComponent,
-    SidebarComponent,
-    SidebarComponent
   ],
   imports: [
+    LeafletModule,
     CommonModule,
     GmsRoutingModule,
     NbMenuModule,
@@ -35,7 +29,11 @@ import {SidebarComponent} from "./layout/sidebar/sidebar.component";
     NbButtonModule,
     NbActionsModule,
     NbUserModule,
+    NbCardModule,
+    
+  
   ],
+  bootstrap: [LayoutComponent]
 
 })
 export class GmsModule { }
