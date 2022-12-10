@@ -22,14 +22,14 @@ export class MapComponent implements OnInit {
   }
 
 
-  map_ready(event: any): void {
+  map_ready(event: Leaflet.Map): void {
+    this.map = event;
+
     const greenIcon = Leaflet.icon({
       iconUrl: 'assets/genset.png',
-      iconSize:     [38, 95], // size of the icon
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize:     [42, 42], // size of the icon
     });
-    Leaflet.marker([51.5, -0.09], {icon: greenIcon}).addTo(this.map);
+    Leaflet.marker([20.692294, -100.445357], {icon: greenIcon, draggable: false}).addTo(this.map);
 
   }
 
