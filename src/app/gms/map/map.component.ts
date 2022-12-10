@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as L from 'leaflet';
+import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'app-map',
@@ -8,17 +8,39 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-
+  map!: Leaflet.Map;
+  markers: Leaflet.Marker[] = [];
   options = {
     layers: [
-      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
+      Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: ''
+      })
     ],
-    zoom: 5,
-    center: L.latLng({ lat: 38.991709, lng: -76.886109 }),
-  };
+    zoom: 5.49,
+    center: { lat: 23.2212479, lng: -110.9962219 },
+    zoomControl: false
+  }
+
+
+
+
+  generateMarker(data: any, index: number) {
+    return Leaflet.marker(data.position, { draggable: data.draggable })
+      .on('click', (event) => this.markerClicked(event, index))
+  }
+
+  onMapReady($event: Leaflet.Map) {
+
+  }
+
+  mapClicked($event: any) {
+    console.log($event.latlng.lat, $event.latlng.lng);
+  }
+
+  markerClicked($event: any, index: number) {
+    console.log($event.latlng.lat, $event.latlng.lng);
+  }
+
 
   ngOnInit(): void {
   }

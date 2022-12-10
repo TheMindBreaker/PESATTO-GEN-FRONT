@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GmsRoutingModule } from './gms-routing.module';
 import { MapComponent } from './map/map.component';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {LayoutComponent} from "./layout/layout.component";
 import {
   NbActionsModule,
@@ -10,10 +9,11 @@ import {
   NbCardModule,
   NbLayoutModule,
   NbMenuModule,
-  NbSidebarModule,
+  NbSidebarModule, NbTableModule,
   NbUserModule,
-  
+
 } from "@nebular/theme";
+import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -30,8 +30,9 @@ import {
     NbActionsModule,
     NbUserModule,
     NbCardModule,
-    
-  
+    NbTableModule,
+
+
   ],
   bootstrap: [LayoutComponent]
 

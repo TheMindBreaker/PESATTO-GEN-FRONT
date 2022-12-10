@@ -1,16 +1,15 @@
 <nb-layout>
-  <nb-layout-header>
-      <nb-action icon="grid-outline" (click)="toggle()"></nb-action>
+  <nb-layout-header fixed>
+    <nb-action icon="grid-outline" (click)="toggle()"></nb-action>
   </nb-layout-header>
   <nb-sidebar left tag="left">
-      <nb-layout-column>
-              <nb-menu [items]="items">
-              </nb-menu>
-      </nb-layout-column>
+    <nb-layout-column>
+      <nb-menu [items]="items">
+      </nb-menu>
+    </nb-layout-column>
   </nb-sidebar>
-  <nb-layout-column>
+  <nb-layout-column nbColumnDef="0" style="padding: 0px">
 
-      <router-outlet></router-outlet>
-
+    <router-outlet></router-outlet>
   </nb-layout-column>
 </nb-layout>
