@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import * as Leaflet from 'leaflet';
 import * as events from "events";
+import {NbWindowControlButtonsConfig, NbWindowService} from '@nebular/theme';
+import {DeviceListComponent} from "../device-list/device-list.component";
 
 @Component({
   selector: 'app-map',
@@ -9,6 +11,16 @@ import * as events from "events";
 })
 export class MapComponent implements OnInit {
 
+  users: { name: string, title: string }[] = [
+    { name: 'Carla Espinosa', title: 'Nurse' },
+    { name: 'Bob Kelso', title: 'Doctor of Medicine' },
+    { name: 'Janitor', title: 'Janitor' },
+    { name: 'Perry Cox', title: 'Doctor of Medicine' },
+    { name: 'Ben Sullivan', title: 'Carpenter and photographer' },
+  ];
+  constructor(private windowService: NbWindowService) {
+
+  }
   map!: Leaflet.Map;
   options = {
     layers: [
@@ -18,8 +30,9 @@ export class MapComponent implements OnInit {
     ],
     zoom: 5.49,
     center: { lat: 23.2212479, lng: -110.9962219 },
-    zoomControl: false
+    zoomControl: true
   }
+  items: any;
 
 
   map_ready(event: Leaflet.Map): void {

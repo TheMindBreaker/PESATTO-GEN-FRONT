@@ -1,5 +1,6 @@
-<div class="map-container" id="mymap"
-     leaflet
-     [leafletOptions]="options"
-     (leafletMapReady)="map_ready($event)">
-</div>
+<nb-card status="info" style="padding: 0">
+  <nb-card-body style="padding:0">
+    <div class="map-container" leaflet [leafletOptions]="options"
+         (leafletMapReady)="map_ready($event)"></div>
+  </nb-card-body>
+</nb-card>

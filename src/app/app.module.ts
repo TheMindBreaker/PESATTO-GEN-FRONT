@@ -12,14 +12,14 @@ import {
   NbSidebarModule, NbThemeModule,
   NbToastrModule,
   NbWindowModule,
-  NbCardModule
+  NbCardModule, NbContextMenuModule
 
-  
-  
+
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule } from '@angular/common/http';
 import {NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken} from '@nebular/auth';
+import {AuthGuard} from "./auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +31,9 @@ import {NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken} from '@nebular/aut
     AppRoutingModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
+    NbMenuModule.forRoot(),
+    NbContextMenuModule,
+    NbSidebarModule.forRoot(),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
@@ -51,9 +54,14 @@ import {NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken} from '@nebular/aut
             class: NbAuthJWTToken,
             key: 'token', // this parameter tells where to look for the token
           },
+
           baseEndpoint: 'http://127.0.0.1:5000',
           login: {
             endpoint: '/auth/sign-in',
+            redirect: {
+              success: '/gms/map', // welcome page path
+              failure: null, // stay on the same page
+            },
           },
           register: {
             endpoint: '/auth/sign-up',
@@ -72,7 +80,7 @@ import {NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken} from '@nebular/aut
       forms: {},
     }),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

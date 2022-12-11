@@ -6,33 +6,43 @@ import {LayoutComponent} from "./layout/layout.component";
 import {
   NbActionsModule,
   NbButtonModule,
-  NbCardModule,
-  NbLayoutModule,
-  NbMenuModule,
+  NbCardModule, NbContextMenuModule, NbIconModule,
+  NbLayoutModule, NbListModule,
+  NbMenuModule, NbSearchModule, NbSelectModule,
   NbSidebarModule, NbTableModule,
-  NbUserModule,
+  NbUserModule, NbWindowModule,
 
 } from "@nebular/theme";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
+import { DeviceListComponent } from './device-list/device-list.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { IndexComponent } from './index/index.component';
 @NgModule({
   declarations: [
     LayoutComponent,
     MapComponent,
+    DeviceListComponent,
+    HeaderComponent,
+    IndexComponent,
   ],
   imports: [
+    NbWindowModule.forChild(),
     LeafletModule,
     CommonModule,
     GmsRoutingModule,
-    NbMenuModule,
     NbLayoutModule,
-    NbSidebarModule,
     NbButtonModule,
     NbActionsModule,
     NbUserModule,
     NbCardModule,
     NbTableModule,
-
-
+    NbListModule,
+    NbSearchModule,
+    NbSelectModule,
+    NbIconModule,
+    NbContextMenuModule,
+    NbSidebarModule,
+    NbMenuModule
   ],
   bootstrap: [LayoutComponent]
 

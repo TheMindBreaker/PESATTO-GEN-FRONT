@@ -8,12 +8,14 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import {AuthGuard} from "./auth-guard.service";
 
 const routes: Routes = [
 
-  
+
   {
     path: 'gms',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./gms/gms.module')
       .then(m => m.GmsModule),
   },

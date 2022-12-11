@@ -1,15 +1,29 @@
 <nb-layout>
-  <nb-layout-header fixed>
-    <nb-action icon="grid-outline" (click)="toggle()"></nb-action>
-  </nb-layout-header>
-  <nb-sidebar left tag="left">
-    <nb-layout-column>
-      <nb-menu [items]="items">
-      </nb-menu>
-    </nb-layout-column>
-  </nb-sidebar>
-  <nb-layout-column nbColumnDef="0" style="padding: 0px">
 
+  <nb-layout-header subheader>
+    <nb-user name="Nikita Poltoratsky"
+             title="full-stack developer"
+             showInitials="true"
+             [nbContextMenu]="items"
+             nbContextMenuTag="options">
+    </nb-user>
+
+  </nb-layout-header>
+
+
+  <nb-sidebar [containerFixed]=false class="menu-sidebar" tag="menu-sidebar" responsive fixed>
+    <nb-sidebar-header>
+      <div class="align-content: center">
+        <img  src="assets/genset.png" style="width: 4em;"/>
+
+      </div>
+    </nb-sidebar-header>
+    <nb-menu [items]="menu"></nb-menu>
+  </nb-sidebar>
+
+  <nb-layout-column>
     <router-outlet></router-outlet>
   </nb-layout-column>
+  <nb-layout-footer fixed>
+  </nb-layout-footer>
 </nb-layout>
