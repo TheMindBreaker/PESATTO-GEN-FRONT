@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NbMenuItem, NbPosition, NbSidebarService} from '@nebular/theme';
-import {NbAuthService} from "@nebular/auth";
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 
 
 @Component({
@@ -19,6 +19,11 @@ import {NbAuthService} from "@nebular/auth";
 })
 
 export class LayoutComponent {
+  user: { email: string; name: string; id: string; }= {
+    email: '',
+    name: '',
+    id: ''
+  };
   items = [{ title: 'Profile', link:'' }, { title: 'Log out', link: './auth/logout' }];
   auth?: NbAuthService;
   menu : NbMenuItem[] = [
@@ -33,7 +38,15 @@ export class LayoutComponent {
       icon: 'map',
     }
   ];
-  constructor(private sidebarService: NbSidebarService, authService: NbAuthService){
+  constructor(private sidebarService: NbSidebarService,private authService: NbAuthService){
+    this.authService.onTokenChange()
+      .subscribe((token) => {
+
+        if (token.isValid()) {
+          this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable
+        }
+
+      });
   }
 
   toggle() {

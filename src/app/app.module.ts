@@ -54,7 +54,6 @@ import {AuthGuard} from "./auth-guard.service";
             class: NbAuthJWTToken,
             key: 'token', // this parameter tells where to look for the token
           },
-
           baseEndpoint: 'http://127.0.0.1:5000',
           login: {
             endpoint: '/auth/sign-in',
@@ -62,6 +61,7 @@ import {AuthGuard} from "./auth-guard.service";
               success: '/gms/map', // welcome page path
               failure: null, // stay on the same page
             },
+
           },
           register: {
             endpoint: '/auth/sign-up',
@@ -75,9 +75,9 @@ import {AuthGuard} from "./auth-guard.service";
           resetPass: {
             endpoint: '/auth/reset-pass',
           },
+
         }),
       ],
-      forms: {},
     }),
   ],
   providers: [AuthGuard],
