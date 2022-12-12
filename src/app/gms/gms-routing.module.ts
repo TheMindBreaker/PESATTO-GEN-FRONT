@@ -4,6 +4,7 @@ import {LayoutComponent} from "./layout/layout.component";
 import {MapComponent} from "./map/map.component";
 import {NbSidebarModule} from "@nebular/theme";
 import {IndexComponent} from "./index/index.component";
+import {DeviceComponent} from "./device/device.component";
 
 const routes: Routes = [
 
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'map',
         component: MapComponent
+      },
+      {
+        path: 'device/:id',
+        component: DeviceComponent
       }
     ]
   },

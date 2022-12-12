@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NbAuthJWTToken, NbAuthService} from "@nebular/auth";
 import {DeviceBasic} from "../model/device_basic";
 import {Observable} from "rxjs";
+import {Device} from "../model/device";
 @Injectable({
   providedIn: 'root'
 })
@@ -21,5 +22,13 @@ export class DeviceService {
       'Authorization': `Bearer ${this.token}`
     });
     return this.http.get<[DeviceBasic]>(environment.apiUrl + "/devices",{headers: headers});
+  }
+
+  getDevice(id: string): Observable<Device> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get<Device>(environment.apiUrl + "/device/"+id,{headers: headers});
   }
 }

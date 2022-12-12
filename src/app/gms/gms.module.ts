@@ -4,19 +4,20 @@ import { GmsRoutingModule } from './gms-routing.module';
 import { MapComponent } from './map/map.component';
 import {LayoutComponent} from "./layout/layout.component";
 import {
-  NbActionsModule,
-  NbButtonModule,
-  NbCardModule, NbContextMenuModule, NbIconModule,
-  NbLayoutModule, NbListModule,
-  NbMenuModule, NbSearchModule, NbSelectModule,
-  NbSidebarModule, NbTableModule,
-  NbUserModule, NbWindowModule,
+    NbActionsModule,
+    NbButtonModule,
+    NbCardModule, NbContextMenuModule, NbIconModule,
+    NbLayoutModule, NbListModule,
+    NbMenuModule, NbProgressBarModule, NbSearchModule, NbSelectModule,
+    NbSidebarModule, NbTableModule,
+    NbUserModule, NbWindowModule,
 
 } from "@nebular/theme";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import { DeviceListComponent } from './device-list/device-list.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { IndexComponent } from './index/index.component';
+import { DeviceComponent } from './device/device.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -24,26 +25,28 @@ import { IndexComponent } from './index/index.component';
     DeviceListComponent,
     HeaderComponent,
     IndexComponent,
+    DeviceComponent,
   ],
-  imports: [
-    NbWindowModule.forChild(),
-    LeafletModule,
-    CommonModule,
-    GmsRoutingModule,
-    NbLayoutModule,
-    NbButtonModule,
-    NbActionsModule,
-    NbUserModule,
-    NbCardModule,
-    NbTableModule,
-    NbListModule,
-    NbSearchModule,
-    NbSelectModule,
-    NbIconModule,
-    NbContextMenuModule,
-    NbSidebarModule,
-    NbMenuModule
-  ],
+    imports: [
+        NbWindowModule.forChild(),
+        LeafletModule,
+        CommonModule,
+        GmsRoutingModule,
+        NbLayoutModule,
+        NbButtonModule,
+        NbActionsModule,
+        NbUserModule,
+        NbCardModule,
+        NbTableModule,
+        NbListModule,
+        NbSearchModule,
+        NbSelectModule,
+        NbIconModule,
+        NbContextMenuModule,
+        NbSidebarModule,
+        NbMenuModule,
+        NbProgressBarModule
+    ],
   bootstrap: [LayoutComponent]
 
 })

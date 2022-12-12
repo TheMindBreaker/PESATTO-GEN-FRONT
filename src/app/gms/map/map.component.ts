@@ -32,31 +32,31 @@ export class MapComponent implements OnInit {
     zoomControl: true
   }
 
-  items: { id: any, color: any }[] = [];
+  items: {realId: string, id: any, color: any }[] = [];
 
   getDevices(event: Leaflet.Map) {
     this.deviceService.getDevicesBasic().subscribe((devices) => {
-      this.devices = devices;
-      if (devices[0].STATUS) {
-        this.items = [{
-          id: devices[0].IDENTIFIER,
-          color: 'green'
-        }]
-      }else{
-        this.items = [{
-          id: devices[0].IDENTIFIER,
-          color: 'red'
-        }]
-      }
-      
-      
-      console.log(this.items);
-      console.log(this.devices);
+
       devices.forEach((row) => {
         const greenIcon = Leaflet.icon({
           iconUrl: 'assets/genset.png',
           iconSize:     [42, 42], // size of the icon
         });
+
+        if (row.STATUS) {
+          this.items.push({
+            realId: row._id,
+            id: row.IDENTIFIER,
+            color: 'green'
+          });
+        }else{
+          this.items.push({
+            realId: row._id,
+            id:row.IDENTIFIER,
+            color: 'red'
+          })
+        }
+
           Leaflet.marker([row.LATITUDE, row.LONGITUDE], {icon: greenIcon, draggable: false}).bindPopup("<ul><li><strong>ID:</strong>"+row._id+"</li><li><strong>AL:</strong>"+row.ALIAS+"</li><li><strong>ST:</strong>"+row.STATUS+"</li></ul>").addTo(event);
       })
     })
