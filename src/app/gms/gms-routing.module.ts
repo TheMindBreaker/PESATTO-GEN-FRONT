@@ -7,6 +7,7 @@ import {IndexComponent} from "./index/index.component";
 import {DeviceComponent} from "./device/device.component";
 
 const routes: Routes = [
+  
 
   {
     path:'',

@@ -13,6 +13,7 @@ import {SocketDeviceService} from "../../service/socketDevice";
 export class DeviceComponent implements OnInit {
   deviceID: string = "";
   Device?: Device
+  color: string = '';
   constructor(private actRoute: ActivatedRoute, private deviceService : DeviceService, private socketService: SocketDeviceService) {
     this.deviceID = this.actRoute.snapshot.params['id'];
     this.getData()
@@ -26,6 +27,14 @@ export class DeviceComponent implements OnInit {
 
   getPercent(value: number, max: number) {
     let calc = (value*100) / max;
+    if (calc > max) {
+      console.log(calc+' '+ max);
+      this.color = 'danger'
+    }else if( calc < max-20){
+      this.color = 'primary'
+    } else {
+      this.color = 'warning'
+    }
     return calc;
   }
 

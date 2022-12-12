@@ -58,31 +58,31 @@
                 <tbody>
                 <tr>
                   <td>Frecuencia</td>
-                  <td><nb-progress-bar style="width:100%" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_FREC/10, 70)" status="primary" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_FREC/10}} HZ</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_FREC/10, 70)" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_FREC/10}} HZ</nb-progress-bar></td>
                 </tr>
                 <tr>
                   <td>MAIN AU</td>
-                  <td><nb-progress-bar style="width:100%" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_AU, 130)" status="primary" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_AU}} V</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_AU, 130)"   [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_AU}} V</nb-progress-bar></td>
                 </tr>
                 <tr>
                   <td>MAIN AB</td>
-                  <td><nb-progress-bar style="width:100%" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_AB, 130)" status="primary" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_AB}} V</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_AB, 130)"   [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_AB}} V</nb-progress-bar></td>
                 </tr>
                 <tr>
                   <td>MAIN AC</td>
-                  <td><nb-progress-bar style="width:100%" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_AC, 130)" status="primary" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_AC}} V</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_AC, 130)"   [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_AC}} V</nb-progress-bar></td>
                 </tr>
                 <tr>
                   <td>MAIN UAB</td>
-                  <td><nb-progress-bar style="width:100%" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_UAB, 250)" status="primary" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_UAB}} V</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_UAB, 250)"  [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_UAB}} V</nb-progress-bar></td>
                 </tr>
                 <tr>
                   <td>MAIN UBC</td>
-                  <td><nb-progress-bar style="width:100%" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_UBC, 250)" status="primary" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_UBC}} V</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_UBC, 250)"  [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_UBC}} V</nb-progress-bar></td>
                 </tr>
                 <tr>
                   <td>MAIN UCA</td>
-                  <td><nb-progress-bar style="width:100%" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_UCA, 250)" status="primary" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_UCA}} V</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_UCA, 250)"  [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_UCA}} V</nb-progress-bar></td>
                 </tr>
                 </tbody>
               </table>
