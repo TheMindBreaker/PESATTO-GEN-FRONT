@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {DeviceService} from "../../service/device.service";
 import {Device} from "../../model/device";
 import {SocketDeviceService} from "../../service/socketDevice";
+import {forEach} from "@angular-devkit/schematics";
 
 
 @Component({
@@ -99,5 +100,7 @@ export class DeviceComponent implements OnInit {
         return ''
     }
   }
+
+
 
 }

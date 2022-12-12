@@ -94,6 +94,16 @@
         </nb-card>
       </div>
     </div>
+    <div class="row col-12">
+      <nb-card>
+        <nb-card-header>Fallas</nb-card-header>
+        <nb-card-body>
+            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.GEN | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-warning">{{gen.key}}</span>
+            </ng-container>
+        </nb-card-body>
+      </nb-card>
+    </div>
   </div>
   <div class="col-4">
     <nb-card status="info">
@@ -101,6 +111,14 @@
       <nb-card-body>
         <table class="table table-responsive">
           <tbody>
+            <tr>
+              <td><strong>Modo</strong></td>
+              <td>
+                <div *ngFor="let row of Device.DEVICE_INPUT.MODE | keyvalue">
+                  <span *ngIf="row.value" class="badge bg-info">{{row.key}}</span>
+                </div>
+              </td>
+            </tr>
             <tr>
               <td><strong>Controlador</strong></td>
               <td [innerHtml]="controllerRunningStatus(Device.DEVICE_VALUE.CONTROLLER_RUNNING_STATUS)"></td>

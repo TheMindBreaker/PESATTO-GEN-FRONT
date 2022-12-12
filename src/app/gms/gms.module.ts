@@ -9,7 +9,7 @@ import {
     NbCardModule, NbContextMenuModule, NbIconModule,
     NbLayoutModule, NbListModule,
     NbMenuModule, NbProgressBarModule, NbSearchModule, NbSelectModule,
-    NbSidebarModule, NbTableModule,
+    NbSidebarModule, NbTableModule, NbTagModule,
     NbUserModule, NbWindowModule,
 
 } from "@nebular/theme";
@@ -30,7 +30,7 @@ import {SocketDeviceService} from "../service/socketDevice";
   ],
   providers: [SocketDeviceService],
 
-  imports: [
+    imports: [
         NbWindowModule.forChild(),
         LeafletModule,
         CommonModule,
@@ -48,7 +48,8 @@ import {SocketDeviceService} from "../service/socketDevice";
         NbContextMenuModule,
         NbSidebarModule,
         NbMenuModule,
-        NbProgressBarModule
+        NbProgressBarModule,
+        NbTagModule
     ],
   bootstrap: [LayoutComponent]
 
