@@ -15,9 +15,9 @@ const routes: Routes = [
 
   {
     path: 'gms',
-/*     canActivate: [AuthGuard],
- */    loadChildren: () => import('./gms/gms.module')
-      .then(m => m.GmsModule),
+     canActivate: [AuthGuard],
+     loadChildren: () => import('./gms/gms.module')
+     .then(m => m.GmsModule),
   },
   {
     path: 'auth',

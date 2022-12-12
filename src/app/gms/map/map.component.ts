@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import * as Leaflet from 'leaflet';
 import * as events from "events";
@@ -7,6 +8,7 @@ import {DeviceService} from "../../service/device.service";
 import {DeviceBasic} from "../../model/device_basic";
 import {Marker} from "leaflet";
 import {Device} from "../../model/device";
+import { routes } from '@nebular/auth';
 
 @Component({
   selector: 'app-map',
@@ -15,8 +17,8 @@ import {Device} from "../../model/device";
 })
 export class MapComponent implements OnInit {
   markers: any;
-  devices: DeviceBasic[] | undefined;
-  constructor(private windowService: NbWindowService, private deviceService: DeviceService){
+  devices: Array<DeviceBasic> = [];
+  constructor(private windowService: NbWindowService, private deviceService: DeviceService, private r:Router){
   }
   map!: Leaflet.Map;
   options = {
@@ -29,11 +31,27 @@ export class MapComponent implements OnInit {
     center: { lat: 23.2212479, lng: -110.9962219 },
     zoomControl: true
   }
-  items: any;
+
+  items: { id: any, color: any }[] = [];
 
   getDevices(event: Leaflet.Map) {
     this.deviceService.getDevicesBasic().subscribe((devices) => {
       this.devices = devices;
+      if (devices[0].STATUS) {
+        this.items = [{
+          id: devices[0].IDENTIFIER,
+          color: 'green'
+        }]
+      }else{
+        this.items = [{
+          id: devices[0].IDENTIFIER,
+          color: 'red'
+        }]
+      }
+      
+      
+      console.log(this.items);
+      console.log(this.devices);
       devices.forEach((row) => {
         const greenIcon = Leaflet.icon({
           iconUrl: 'assets/genset.png',
@@ -47,6 +65,10 @@ export class MapComponent implements OnInit {
     this.getDevices(event);
 
 
+  }
+
+  list(){
+    this.r.navigateByUrl('https://outlook.office.com/mail/')
   }
 
   setMarkers(map: Leaflet.Map): void {

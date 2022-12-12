@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://127.0.0.1:5000",
-  socketUrl: "http://127.0.0.1:5001"
+  apiUrl: "http://192.168.8.5:5000",
+  socketUrl: "http://192.168.8.5:5001"
 };

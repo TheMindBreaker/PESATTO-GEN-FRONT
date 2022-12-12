@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { DeviceService } from 'src/app/service/device.service';
 @Component({
   selector: 'app-device-list',
   templateUrl: './device-list.component.html',
@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeviceListComponent implements OnInit {
 
-
-  constructor() { 
+constructor(private service: DeviceService) { 
 
   }
+
+  
+
   devices: { id: string, status: string, url: string }[] = [
     { id: 'CMM-14', status: 'activo', url: 'green' },
     { id: 'CMM-15', status: 'activo', url: 'google.com' },
@@ -20,6 +22,8 @@ export class DeviceListComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+
+    this
   }
 
 }

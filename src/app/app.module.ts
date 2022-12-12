@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -54,7 +55,7 @@ import {AuthGuard} from "./auth-guard.service";
             class: NbAuthJWTToken,
             key: 'token', // this parameter tells where to look for the token
           },
-          baseEndpoint: 'http://127.0.0.1:5000',
+          baseEndpoint: environment.apiUrl,
           login: {
             endpoint: '/auth/sign-in',
             redirect: {
