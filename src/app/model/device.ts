@@ -15,5 +15,6 @@ export class Device {
   LONGITUDE!: number ;
   PASSWORD!: number;
   DEVICE_VALUE!: DeviceValue;
+  ALIAS!: string;
 
 }

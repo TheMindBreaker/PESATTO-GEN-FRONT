@@ -40,4 +40,55 @@ export class DeviceComponent implements OnInit {
     })
   }
 
+  controllerRunningStatus(status: number) {
+    switch (status) {
+      case 0:
+        return '<span class="badge bg-info">StandBy</span>'
+      case 1:
+        return '<span class="badge bg-warning">Pre Heating</span>'
+      case 2:
+        return '<span class="badge bg-warning">Fuel Output</span>'
+      case 3:
+        return '<span class="badge bg-warning">Crank</span>'
+      case 4:
+        return '<span class="badge bg-warning">Crank Rest</span>'
+      case 5:
+        return '<span class="badge bg-warning">Safety Delay</span>'
+      case 6:
+        return '<span class="badge bg-success">Start Idle</span>'
+      case 7:
+        return '<span class="badge bg-success">High Speed Warming Up</span>'
+      case 8:
+        return '<span class="badge bg-success">Wait For Load</span>'
+      case 9:
+        return '<span class="badge bg-success">Normal Running</span>'
+      default:
+        return ''
+    }
+  }
+  ATS(status: number) {
+    switch (status) {
+      case 0:
+        return '<span class="badge bg-info">Iniciar</span>'
+      case 1:
+        return '<span class="badge bg-warning">Parar</span>'
+      case 2:
+        return '<span class="badge bg-warning">Sin Retraso</span>'
+      default:
+        return ''
+    }
+  }
+  PRIN(status: number) {
+    switch (status) {
+      case 0:
+        return '<span class="badge bg-info">Iniciar</span>'
+      case 1:
+        return '<span class="badge bg-warning">Parar</span>'
+      case 2:
+        return '<span class="badge bg-warning">Sin Retraso</span>'
+      default:
+        return ''
+    }
+  }
+
 }

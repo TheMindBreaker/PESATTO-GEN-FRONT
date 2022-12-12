@@ -96,11 +96,25 @@
     </div>
   </div>
   <div class="col-4">
-    <nb-card>
-      <nb-card-header>Acciones</nb-card-header>
-      {{Device.DEVICE_VALUE.UPDATED}}
+    <nb-card status="info">
+      <nb-card-header>Status</nb-card-header>
       <nb-card-body>
-
+        <table class="table table-responsive">
+          <tbody>
+            <tr>
+              <td><strong>Controlador</strong></td>
+              <td [innerHtml]="controllerRunningStatus(Device.DEVICE_VALUE.CONTROLLER_RUNNING_STATUS)"></td>
+            </tr>
+            <tr>
+              <td><strong>AUTO</strong></td>
+              <td [innerHtml]="ATS(Device.DEVICE_VALUE.AUTO_RUNNING_STATUS)"></td>
+            </tr>
+            <tr>
+              <td><strong>Principal</strong></td>
+              <td [innerHtml]="PRIN(Device.DEVICE_VALUE.MAIN_STATUS)"></td>
+            </tr>
+          </tbody>
+        </table>
       </nb-card-body>
     </nb-card>
     <nb-card>
@@ -109,10 +123,36 @@
         <thead>
         </thead>
         <tbody>
-          <tr *ngFor="let item of Device | keyvalue">
-            <td><strong>{{item.key}}</strong></td>
-            <td>{{item.value}}</td>
-          </tr>
+        <tr>
+          <td><strong>FECHA DE DATOS</strong></td>
+          <td>{{Device.DEVICE_VALUE.UPDATED | date: 'long'}}</td>
+        </tr>
+        <tr>
+          <td><strong>ALIAS</strong></td>
+          <td>{{Device.ALIAS}}</td>
+        </tr>
+        <tr>
+          <td><strong>ID Unico</strong></td>
+          <td>{{Device.IDENTIFIER}}</td>
+        </tr>
+        <tr>
+          <td><strong>_id</strong></td>
+          <td>{{Device._id}}</td>
+        </tr>
+        <tr>
+          <td><strong>Tipo de Modulo</strong></td>
+          <td>{{Device.MODULE_TYPE}}</td>
+        </tr>
+        <tr>
+          <td><strong>Puerto</strong></td>
+          <td>{{Device.MODULE_PORT}}</td>
+        </tr>
+        <tr>
+          <td><strong>Baud</strong></td>
+          <td>{{Device.MODULE_BAUD}}</td>
+        </tr>
+
+
         </tbody>
       </table>
     </nb-card>
