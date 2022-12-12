@@ -11,6 +11,7 @@ import {Device} from "../model/device";
 
 export class DeviceService {
   token = "";
+
   constructor(private http: HttpClient, private authService: NbAuthService) {
     this.authService.getToken().subscribe(token => {
       this.token = token.toString()
@@ -31,4 +32,5 @@ export class DeviceService {
     });
     return this.http.get<Device>(environment.apiUrl + "/device/"+id,{headers: headers});
   }
+
 }

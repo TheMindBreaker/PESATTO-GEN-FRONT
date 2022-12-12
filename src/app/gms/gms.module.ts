@@ -18,6 +18,7 @@ import { DeviceListComponent } from './device-list/device-list.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { IndexComponent } from './index/index.component';
 import { DeviceComponent } from './device/device.component';
+import {SocketDeviceService} from "../service/socketDevice";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -27,7 +28,9 @@ import { DeviceComponent } from './device/device.component';
     IndexComponent,
     DeviceComponent,
   ],
-    imports: [
+  providers: [SocketDeviceService],
+
+  imports: [
         NbWindowModule.forChild(),
         LeafletModule,
         CommonModule,

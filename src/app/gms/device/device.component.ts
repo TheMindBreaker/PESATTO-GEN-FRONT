@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {DeviceService} from "../../service/device.service";
 import {Device} from "../../model/device";
+import {SocketDeviceService} from "../../service/socketDevice";
 
 
 @Component({
@@ -12,7 +13,7 @@ import {Device} from "../../model/device";
 export class DeviceComponent implements OnInit {
   deviceID: string = "";
   Device?: Device
-  constructor(private actRoute: ActivatedRoute, private deviceService : DeviceService) {
+  constructor(private actRoute: ActivatedRoute, private deviceService : DeviceService, private socketService: SocketDeviceService) {
     this.deviceID = this.actRoute.snapshot.params['id'];
     this.getData()
   }
@@ -25,11 +26,18 @@ export class DeviceComponent implements OnInit {
 
   getPercent(value: number, max: number) {
     let calc = (value*100) / max;
-    console.log(calc)
     return calc;
   }
 
   ngOnInit(): void {
+    this.socketService.getNewMessage().subscribe(row => {
+      try {
+        JSON.parse(row).map((data?: Device) => {this.Device = data});
+      } catch (e) {
+        console.log(e);
+      }
+
+    })
   }
 
 }
