@@ -46,13 +46,13 @@ export class MapComponent implements OnInit {
         if (row.STATUS) {
           this.items.push({
             realId: row._id,
-            id: row.IDENTIFIER,
+            id: row.ALIAS,
             color: 'green'
           });
         }else{
           this.items.push({
             realId: row._id,
-            id:row.IDENTIFIER,
+            id:row.ALIAS,
             color: 'red'
           })
         }
