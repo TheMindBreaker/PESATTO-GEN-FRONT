@@ -58,7 +58,7 @@
                 <tbody>
                 <tr>
                   <td>Frecuencia</td>
-                  <td><nb-progress-bar style="width:100%" [status]="color" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_FREC/10, 70)" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_FREC/10}} HZ</nb-progress-bar></td>
+                  <td><nb-progress-bar style="width:100%" status="primary" [value]="getPercent(Device!.DEVICE_VALUE!.MAIN_FREC/10, 70)" [displayValue]="false">{{Device!.DEVICE_VALUE!.MAIN_FREC/10}} HZ</nb-progress-bar></td>
                 </tr>
                 <tr>
                   <td>MAIN AU</td>
@@ -106,8 +106,8 @@
     </div>
   </div>
   <div class="col-4">
-    <nb-card status="info">
-      <nb-card-header>Status</nb-card-header>
+    <nb-card [status]="Device.STATUS?'success':'danger'">
+      <nb-card-header>{{Device.STATUS?'En linea':'Desconectado'}}</nb-card-header>
       <nb-card-body>
         <table class="table table-responsive">
           <tbody>
@@ -115,7 +115,7 @@
               <td><strong>Modo</strong></td>
               <td>
                 <div *ngFor="let row of Device.DEVICE_INPUT.MODE | keyvalue">
-                  <span *ngIf="row.value" class="badge bg-info">{{row.key}}</span>
+                  <span *ngIf="row.value" [ngClass]="modeStatus(row.key, row.value)">{{row.key}}</span>
                 </div>
               </td>
             </tr>

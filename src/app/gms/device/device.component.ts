@@ -28,13 +28,12 @@ export class DeviceComponent implements OnInit {
 
   getPercent(value: number, max: number) {
     let calc = (value*100) / max;
-    if (calc > max) {
-      console.log(calc+' '+ max);
-      this.color = 'danger'
-    }else if( calc < max-20){
+    if (calc >= 85) {
       this.color = 'primary'
+    }else if( calc > 65 && calc >84){
+      this.color = 'warning '
     } else {
-      this.color = 'warning'
+      this.color = 'danger'
     }
     return calc;
   }
@@ -49,6 +48,8 @@ export class DeviceComponent implements OnInit {
 
     })
   }
+
+  
 
   controllerRunningStatus(status: number) {
     switch (status) {
@@ -98,6 +99,19 @@ export class DeviceComponent implements OnInit {
         return '<span class="badge bg-warning">Sin Retraso</span>'
       default:
         return ''
+    }
+  }
+  modeStatus(key : string, val : true){
+    if (key == 'STOP_MODE') {
+      return 'badge bg-danger';
+    }else if(key == 'MANUAL_MODE'){
+      return 'badge bg-primary';
+    }else if(key == 'TEST_MODE'){
+      return 'badge bg-secondary';
+    }else if(key == 'AUTO_MODE'){
+      return 'badge bg-success';
+    } else {
+      return 'badge bg-primary';
     }
   }
 
