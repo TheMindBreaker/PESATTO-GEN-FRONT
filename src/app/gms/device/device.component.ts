@@ -32,7 +32,7 @@ export class DeviceComponent implements OnInit {
   ngOnInit(): void {
     this.socketService.getNewMessage().subscribe(row => {
       try {
-        JSON.parse(row).map((data?: Device) => {this.Device = data});
+        this.Device = JSON.parse(row)
       } catch (e) {
         console.log(e);
       }
