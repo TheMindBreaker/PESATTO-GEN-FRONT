@@ -7,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeviceListComponent implements OnInit {
 
-  constructor() { }
+
+  constructor() { 
+
+  }
+  devices: { id: string, status: string, url: string }[] = [
+    { id: 'CMM-14', status: 'activo', url: 'green' },
+    { id: 'CMM-15', status: 'activo', url: 'google.com' },
+    { id: 'CMM-16', status: 'inactivo', url: 'google.com' },
+    { id: 'CMM-17', status: 'inactivo', url: 'google.com' },
+    { id: 'CMM-18', status: 'activo', url: 'google.com' },
+  ];
 
   ngOnInit(): void {
   }
