@@ -7,6 +7,7 @@ import {
     NbActionsModule,
     NbButtonModule,
     NbCardModule, NbContextMenuModule, NbIconModule,
+    NbInputModule,
     NbLayoutModule, NbListModule,
     NbMenuModule, NbProgressBarModule, NbSearchModule, NbSelectModule,
     NbSidebarModule, NbTableModule, NbTagModule,
@@ -20,6 +21,7 @@ import { IndexComponent } from './index/index.component';
 import { DeviceComponent } from './device/device.component';
 import {SocketDeviceService} from "../service/socketDevice";
 import {SocketDeviceMapService} from "../service/socketDeviceMap";
+import { CommandComponent } from './device/command/command.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -28,6 +30,7 @@ import {SocketDeviceMapService} from "../service/socketDeviceMap";
     HeaderComponent,
     IndexComponent,
     DeviceComponent,
+    CommandComponent,
   ],
   providers: [SocketDeviceService, SocketDeviceMapService],
 
@@ -50,7 +53,8 @@ import {SocketDeviceMapService} from "../service/socketDeviceMap";
         NbSidebarModule,
         NbMenuModule,
         NbProgressBarModule,
-        NbTagModule
+        NbTagModule,
+        NbInputModule
     ],
   bootstrap: [LayoutComponent]
 

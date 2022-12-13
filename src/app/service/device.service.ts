@@ -42,4 +42,19 @@ export class DeviceService {
     }) 
   }
 
+  sendCommand(datos: any, id: string):Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    let data = {
+      COMMAND: datos.COMMAND,
+      DEVICE:  id,
+      COMMAND_NAME: datos.COMMAND_NAME
+    }
+    return this.http.post(environment.apiUrl+"/device/command",data,{
+      headers: headers
+    }) 
+  }
+
 }

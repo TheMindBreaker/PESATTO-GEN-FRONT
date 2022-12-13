@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { CommandComponent } from './command/command.component';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {DeviceService} from "../../service/device.service";
 import {Device} from "../../model/device";
 import {SocketDeviceService} from "../../service/socketDevice";
 import {forEach} from "@angular-devkit/schematics";
+import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class DeviceComponent implements OnInit {
   commands?: any
 
   color: string = '';
-  constructor(private actRoute: ActivatedRoute, private deviceService : DeviceService, private socketService: SocketDeviceService) {
+  constructor(private actRoute: ActivatedRoute, private deviceService : DeviceService, private socketService: SocketDeviceService, private toastrService: NbToastrService) {
     this.deviceID = this.actRoute.snapshot.params['id'];
     this.getData()
   }
@@ -34,8 +36,26 @@ export class DeviceComponent implements OnInit {
   getCommands(m:string){
     this.deviceService.getCommands(m).subscribe(res => {
       this.commands = res
-      console.log(res);
     })
+  }
+
+  runCommand(commnad: any) {
+    let password = prompt("Please Enter Device Password", "password"); 
+    if(password) {
+      if(password == this.Device?.PASSWORD.toString()) {
+
+        this.deviceService.sendCommand(commnad, this.Device?._id).subscribe(row =>{
+          if (row.result) {
+            this.toastrService.success("command executed");
+
+          } else {
+            this.toastrService.danger("command fail to execute");
+
+          }
+
+        })
+      }
+    }
   }
 
   getPercent(value: number, max: number) {
@@ -56,6 +76,7 @@ export class DeviceComponent implements OnInit {
         this.Device = JSON.parse(row)
       } catch (e) {
         console.log(e);
+
       }
 
     })

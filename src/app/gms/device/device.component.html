@@ -93,27 +93,63 @@
         </nb-card-body>
         </nb-card>
       </div>
+      <div>
+        <nb-card>
+          <nb-card-header>General</nb-card-header>
+          <nb-card-body>
+             <table class="table table-responsive">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>BATTERY_VOLTAGE</td>
+                    <td>{{Device.DEVICE_VALUE.BATTERY_VOLTAGE}} V</td>
+                  </tr>
+                  <tr>
+                    <td>ALIAS</td>
+                    <td>{{Device.ALIAS}}</td>
+                  </tr>
+                </tbody>
+             </table>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div>
+        <nb-card>
+          <nb-card-header>Alarmas</nb-card-header>
+          <nb-card-body>
+              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.GEN | keyvalue">
+                <span *ngIf="gen.value" class="badge bg-warning">GEN-{{gen.key}}</span>
+              </ng-container>
+              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.WARNS | keyvalue">
+                <span *ngIf="gen.value" class="badge bg-warning">WARNS-{{gen.key}}</span>
+              </ng-container>
+              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.WARNS_ALARMS | keyvalue">
+                <span *ngIf="gen.value" class="badge bg-warning">WARNS_ALARMS-{{gen.key}}</span>
+              </ng-container>
+              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.SHUTDOWN_ALARM | keyvalue">
+                <span *ngIf="gen.value" class="badge bg-warning">SHUTDOWN_ALARM-{{gen.key}}</span>
+              </ng-container>
+              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.ALARMS | keyvalue">
+                <span *ngIf="gen.value" class="badge bg-warning">ALARMS-{{gen.key}}</span>
+              </ng-container>
+              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.INPUT | keyvalue">
+                <span *ngIf="gen.value" class="badge bg-warning">INPUT-{{gen.key}}</span>
+              </ng-container>
+          </nb-card-body>
+        </nb-card>
+      </div>
     </div>
-    <div class="row col-12">
-      <nb-card>
-        <nb-card-header>Fallas</nb-card-header>
-        <nb-card-body>
-            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.GEN | keyvalue">
-              <span *ngIf="gen.value" class="badge bg-warning">{{gen.key}}</span>
-            </ng-container>
-        </nb-card-body>
-      </nb-card>
-    </div>
+
+    
+    
   </div>
   <div class="col-4">
     <nb-card [status]="Device.STATUS?'success':'danger'">
       <nb-card-header>{{Device.STATUS?'En linea':'Desconectado'}}</nb-card-header>
       <nb-card-body>
-        <nb-actions size="medium">
-          <nb-action icon="power-outline" ></nb-action>
-          <nb-action icon="sync-outline"></nb-action>
-          <nb-action icon="person-outline"></nb-action>
-          <nb-action icon="stop-outline"></nb-action>
+        <nb-actions size="small" *ngIf="Device.STATUS">
+          <nb-action *ngFor="let com of commands" [icon]="com.ICON" [title]="com.COMMAND_NAME" badgeDot="true" (click)="runCommand(com)"></nb-action>
         </nb-actions>
         <table class="table table-responsive">
           <tbody>
