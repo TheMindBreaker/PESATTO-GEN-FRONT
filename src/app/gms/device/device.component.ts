@@ -39,7 +39,7 @@ export class DeviceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socketService.getNewMessage().subscribe(row => {
+    this.socketService.getNewMessage(this.deviceID).subscribe(row => {
       try {
         this.Device = JSON.parse(row)
       } catch (e) {
@@ -49,7 +49,7 @@ export class DeviceComponent implements OnInit {
     })
   }
 
-  
+
 
   controllerRunningStatus(status: number) {
     switch (status) {

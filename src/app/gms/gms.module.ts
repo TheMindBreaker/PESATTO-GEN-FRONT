@@ -19,6 +19,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { IndexComponent } from './index/index.component';
 import { DeviceComponent } from './device/device.component';
 import {SocketDeviceService} from "../service/socketDevice";
+import {SocketDeviceMapService} from "../service/socketDeviceMap";
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -28,7 +29,7 @@ import {SocketDeviceService} from "../service/socketDevice";
     IndexComponent,
     DeviceComponent,
   ],
-  providers: [SocketDeviceService],
+  providers: [SocketDeviceService, SocketDeviceMapService],
 
     imports: [
         NbWindowModule.forChild(),
