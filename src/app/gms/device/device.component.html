@@ -109,6 +109,12 @@
     <nb-card [status]="Device.STATUS?'success':'danger'">
       <nb-card-header>{{Device.STATUS?'En linea':'Desconectado'}}</nb-card-header>
       <nb-card-body>
+        <nb-actions size="medium">
+          <nb-action icon="power-outline" ></nb-action>
+          <nb-action icon="sync-outline"></nb-action>
+          <nb-action icon="person-outline"></nb-action>
+          <nb-action icon="stop-outline"></nb-action>
+        </nb-actions>
         <table class="table table-responsive">
           <tbody>
             <tr>

@@ -32,5 +32,14 @@ export class DeviceService {
     });
     return this.http.get<Device>(environment.apiUrl + "/device/"+id,{headers: headers});
   }
+  getCommands(modulo: string):Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get(environment.apiUrl+"/device/command/"+modulo,{
+      headers: headers
+    }) 
+  }
 
 }

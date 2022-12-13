@@ -14,6 +14,9 @@ import {forEach} from "@angular-devkit/schematics";
 export class DeviceComponent implements OnInit {
   deviceID: string = "";
   Device?: Device
+  module?: string
+  commands?: any
+
   color: string = '';
   constructor(private actRoute: ActivatedRoute, private deviceService : DeviceService, private socketService: SocketDeviceService) {
     this.deviceID = this.actRoute.snapshot.params['id'];
@@ -23,6 +26,15 @@ export class DeviceComponent implements OnInit {
   getData () {
     this.deviceService.getDevice(this.deviceID).subscribe((data) => {
       this.Device = data!;
+      this.module = this.Device.MODULE_TYPE
+      this.getCommands(data.MODULE_TYPE)
+    })
+  }
+
+  getCommands(m:string){
+    this.deviceService.getCommands(m).subscribe(res => {
+      this.commands = res
+      console.log(res);
     })
   }
 

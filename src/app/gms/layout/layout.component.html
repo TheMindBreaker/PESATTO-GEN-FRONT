@@ -8,13 +8,13 @@
              [nbContextMenu]="items"
              nbContextMenuTag="options">
     </nb-user>
-
   </nb-layout-header>
 
 
   <nb-sidebar [containerFixed]=false class="menu-sidebar" tag="menu-sidebar" responsive fixed>
-    <nb-sidebar-header><h3><strong>PESATTO GMS</strong></h3></nb-sidebar-header>
-
+    <div class="logo text-center">
+      <img src="../../../assets/pgms.png" alt="" width="170" height="70">
+    </div>
     <nb-menu [items]="menu"></nb-menu>
   </nb-sidebar>
 
