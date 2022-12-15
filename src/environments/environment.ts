@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://192.168.8.5:5000",
-  socketUrl: "http://192.168.8.5:5001"
+  apiUrl: "https://gms.pesatto.com",
+  socketUrl: "https://gms.pesatto.com/socket"
 };

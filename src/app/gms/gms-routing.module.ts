@@ -1,3 +1,5 @@
+import { UserComponent } from './user/user.component';
+import { UserListComponent } from './user-list/user-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LayoutComponent} from "./layout/layout.component";
@@ -24,6 +26,14 @@ const routes: Routes = [
       {
         path: 'device/:id',
         component: DeviceComponent
+      },
+      {
+        path: 'users',
+        component: UserListComponent,
+      },
+      {
+        path:'adminUser',
+        component: UserComponent
       }
     ]
   },

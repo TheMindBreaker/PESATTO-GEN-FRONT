@@ -1,0 +1,36 @@
+<nb-card>
+    <nb-card-header><h6>Usuarios</h6></nb-card-header>
+    <nb-card-body >
+        <div class="row">
+            <div class="col text-end">
+                <a nbButton shape="round" [routerLink]="['../adminUser']" size="small" status="primary"><i class="bi bi-person-plus m-1"></i>Agregar</a>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Dispositivo</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Fernando Ruiz</td>
+                <td>fernando.ruiz@construtec.mx</td>
+                <td>6391086e7b4b02651abce5b3</td>
+                <td>admin</td>
+                <td>
+                    <button nbButton shape="round" (click)="openWindow()" size="medium" status="danger" class="m-1"><i class="bi bi-trash"></i></button>
+
+                    <button nbButton shape="round" size="medium" status="warning" class="m-1"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </nb-card-body>
+</nb-card>

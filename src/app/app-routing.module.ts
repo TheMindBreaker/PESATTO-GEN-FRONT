@@ -12,7 +12,6 @@ import {AuthGuard} from "./auth-guard.service";
 
 const routes: Routes = [
 
-
   {
     path: 'gms',
      canActivate: [AuthGuard],

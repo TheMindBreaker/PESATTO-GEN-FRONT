@@ -106,8 +106,8 @@
                     <td>{{Device.DEVICE_VALUE.BATTERY_VOLTAGE}} V</td>
                   </tr>
                   <tr>
-                    <td>ALIAS</td>
-                    <td>{{Device.ALIAS}}</td>
+                    <td>ULTIMA CONEXION</td>
+                    <td>{{Device.LAST_CON | date:'short'}}</td>
                   </tr>
                 </tbody>
              </table>
@@ -135,6 +135,8 @@
               </ng-container>
               <ng-container *ngFor="let gen of Device.DEVICE_INPUT.INPUT | keyvalue">
                 <span *ngIf="gen.value" class="badge bg-warning">INPUT-{{gen.key}}</span>
+              </ng-container><ng-container *ngFor="let gen of Device.DEVICE_INPUT.OUTPUT | keyvalue">
+                <span *ngIf="gen.value" class="badge bg-warning">OUTPUT-{{gen.key}}</span>
               </ng-container>
           </nb-card-body>
         </nb-card>
@@ -149,7 +151,7 @@
       <nb-card-header>{{Device.STATUS?'En linea':'Desconectado'}}</nb-card-header>
       <nb-card-body>
         <nb-actions size="small" *ngIf="Device.STATUS">
-          <nb-action *ngFor="let com of commands" [icon]="com.ICON" [title]="com.COMMAND_NAME" badgeDot="true" (click)="runCommand(com)"></nb-action>
+          <nb-action *ngFor="let com of commands" [icon]="com.ICON"  [title]="com.COMMAND_NAME" badgeDot="true" (click)="runCommand(com)"></nb-action>
         </nb-actions>
         <table class="table table-responsive">
           <tbody>

@@ -22,6 +22,8 @@ import { DeviceComponent } from './device/device.component';
 import {SocketDeviceService} from "../service/socketDevice";
 import {SocketDeviceMapService} from "../service/socketDeviceMap";
 import { CommandComponent } from './device/command/command.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserComponent } from './user/user.component';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -31,6 +33,8 @@ import { CommandComponent } from './device/command/command.component';
     IndexComponent,
     DeviceComponent,
     CommandComponent,
+    UserListComponent,
+    UserComponent,
   ],
   providers: [SocketDeviceService, SocketDeviceMapService],
 
