@@ -3,7 +3,7 @@
     <nb-card-body >
         <div class="row">
             <div class="col text-end">
-                <a nbButton shape="round" [routerLink]="['../adminUser']" size="small" status="primary"><i class="bi bi-person-plus m-1"></i>Agregar</a>
+                <button nbButton shape="round" [routerLink]="['../adminUser']"  size="small" status="primary"><i class="bi bi-person-plus m-1"></i>Agregar</button>
             </div>
         </div>
         <table class="table table-striped">
@@ -18,16 +18,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Fernando Ruiz</td>
-                <td>fernando.ruiz@construtec.mx</td>
-                <td>6391086e7b4b02651abce5b3</td>
-                <td>admin</td>
+              <tr *ngFor="let item of usuario; let i = index">
+                <th scope="row">{{i}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.devices}}</td>
+                <td>{{item.role}}</td>
                 <td>
                     <button nbButton shape="round" (click)="openWindow()" size="medium" status="danger" class="m-1"><i class="bi bi-trash"></i></button>
-
-                    <button nbButton shape="round" size="medium" status="warning" class="m-1"><i class="bi bi-pencil"></i></button>
+                    <a [routerLink]="['/gms/adminUser/'+item._id]" nbButton shape="round" size="medium" status="info" class="m-1"><i class="bi bi-eye-fill"></i></a>
                 </td>
               </tr>
             </tbody>

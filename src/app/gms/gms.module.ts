@@ -24,6 +24,7 @@ import {SocketDeviceMapService} from "../service/socketDeviceMap";
 import { CommandComponent } from './device/command/command.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserComponent } from './user/user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -58,7 +59,8 @@ import { UserComponent } from './user/user.component';
         NbMenuModule,
         NbProgressBarModule,
         NbTagModule,
-        NbInputModule
+        NbInputModule,
+        ReactiveFormsModule
     ],
   bootstrap: [LayoutComponent]
 

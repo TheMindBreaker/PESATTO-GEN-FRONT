@@ -1,3 +1,4 @@
+import { DeviceBasic } from './../model/device_basic';
 import { environment } from './../../environments/environment';
 import { User } from './../model/user';
 import { Observable } from 'rxjs';
@@ -15,15 +16,51 @@ export class UsersService {
   
 
   constructor(private http: HttpClient, private auth: NbAuthService) { 
-    this.token = this.auth.getToken.toString();
+    this.auth.getToken().subscribe(token => {
+      this.token = token.toString()
+    });
+  }
+
+  public getUsers():Observable<[User]>{
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
+    return this.http.get<[User]>(environment.local+'list/users',{
+      headers: this.headers
+    })
   }
 
-  /* public getUsers():Observable<[User]>{
-    this.headers;
-    return this.http.get<[User]>(environment.apiUrl)
-  } */
+  public getDevices():Observable<[any]> {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    return this.http.get<[any]>(environment.local+'list/devices',{
+      headers:this.headers
+    })
+  }
+
+  public insertNewUser(form:any):Observable<any> {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.post(environment.local+'new/user',form, {
+      headers:this.headers
+    })
+  }
+
+  public findOneUser(id:string):Observable<any> {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get(environment.local+'find/user/'+id, {
+      headers:this.headers
+    })
+  }
+
+
 }

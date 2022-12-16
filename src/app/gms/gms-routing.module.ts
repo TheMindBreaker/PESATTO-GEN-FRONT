@@ -34,6 +34,10 @@ const routes: Routes = [
       {
         path:'adminUser',
         component: UserComponent
+      },
+      {
+        path:'adminUser/:id',
+        component: UserComponent
       }
     ]
   },
