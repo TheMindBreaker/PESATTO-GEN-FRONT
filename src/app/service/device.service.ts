@@ -57,4 +57,14 @@ export class DeviceService {
     }) 
   }
 
+  createDevice(data: any):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.post<any>(environment.local+'create/device', data, {
+      headers: headers
+    })
+  }
+
 }

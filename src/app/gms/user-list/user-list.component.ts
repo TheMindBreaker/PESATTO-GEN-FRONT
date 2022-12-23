@@ -1,8 +1,9 @@
 import { User } from './../../model/user';
 import { Component, OnInit } from '@angular/core';
-import { NbWindowService } from '@nebular/theme';
+import { NbWindowService, NbToastrService } from '@nebular/theme';
 import { UsersService } from 'src/app/service/users.service';
 import { UserComponent } from '../user/user.component';
+import { TapObserver } from 'rxjs/internal/operators/tap';
 
 
 @Component({
@@ -12,9 +13,9 @@ import { UserComponent } from '../user/user.component';
 })
 export class UserListComponent implements OnInit {
   usuario?: Array<User>;
-  idUser?: string; 
+  idUser?: any; 
 
-  constructor(private windowService: NbWindowService, private service: UsersService) { 
+  constructor(private windowService: NbWindowService, private service: UsersService, private toastrService: NbToastrService) { 
   }
 
   ngOnInit(): void {
@@ -24,6 +25,17 @@ export class UserListComponent implements OnInit {
   getData(){
     this.service.getUsers().subscribe((res) => {
       this.usuario = res;
+    })
+  }
+
+  deleteUser(id:any){
+    this.service.deleteUser(id).subscribe(res => {
+      if (res) {
+        this.getData()
+        this.toastrService.success("Usuario Eliminado");
+      } else {
+        this.toastrService.danger("Ah ocurrido un error");
+      }
     })
   }
 

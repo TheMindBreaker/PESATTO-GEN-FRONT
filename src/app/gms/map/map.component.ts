@@ -1,3 +1,4 @@
+import { UsersService } from './../../service/users.service';
 import { Router } from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import * as Leaflet from 'leaflet';
@@ -13,7 +14,7 @@ import {SocketDeviceMapService} from "../../service/socketDeviceMap";
 })
 export class MapComponent implements OnInit {
   deviceId: string[] = []
-  constructor(private windowService: NbWindowService, private deviceService: DeviceService, private r:Router, private socketDevice: SocketDeviceMapService){
+  constructor(private windowService: NbWindowService,private userService: UsersService, private deviceService: DeviceService, private r:Router, private socketDevice: SocketDeviceMapService){
   }
   map!: Leaflet.Map;
   options = {
@@ -30,7 +31,7 @@ export class MapComponent implements OnInit {
   items: {realId: string, id: any, color: any, lastup: string}[] = [];
 
   getDevices(event: Leaflet.Map) {
-    this.deviceService.getDevicesBasic().subscribe((devices) => {
+    this.userService.getDevices().subscribe((devices) => {
 
       devices.forEach((row) => {
         const greenIcon = Leaflet.icon({

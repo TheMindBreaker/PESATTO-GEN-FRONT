@@ -11,7 +11,7 @@ import {
     NbLayoutModule, NbListModule,
     NbMenuModule, NbProgressBarModule, NbSearchModule, NbSelectModule,
     NbSidebarModule, NbTableModule, NbTagModule,
-    NbUserModule, NbWindowModule,
+    NbUserModule, NbWindowModule, NbFormFieldModule, NbAutocompleteModule, NbStepperModule
 
 } from "@nebular/theme";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
@@ -40,6 +40,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [SocketDeviceService, SocketDeviceMapService],
 
     imports: [
+        NbAutocompleteModule,
+        NbStepperModule,
+        NbFormFieldModule,
         NbWindowModule.forChild(),
         LeafletModule,
         CommonModule,

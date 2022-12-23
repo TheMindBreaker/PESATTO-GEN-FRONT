@@ -62,5 +62,25 @@ export class UsersService {
     })
   }
 
+  public updateUser(form: any, id: string):Observable<any> {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.put<any>(environment.local+'update/user/'+id, form, {
+      headers:this.headers
+    })
+  }
+
+  public deleteUser(id:string):Observable<any> {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.delete(environment.local+'delete/user/'+id, {
+      headers:this.headers
+    })
+  }
+
 
 }

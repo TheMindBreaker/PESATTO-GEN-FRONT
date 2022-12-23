@@ -1,10 +1,10 @@
 import { CommandComponent } from './command/command.component';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {DeviceService} from "../../service/device.service";
-import {Device} from "../../model/device";
-import {SocketDeviceService} from "../../service/socketDevice";
-import {forEach} from "@angular-devkit/schematics";
+import { DeviceService } from "../../service/device.service";
+import { Device } from "../../model/device";
+import { SocketDeviceService } from "../../service/socketDevice";
+import { forEach } from "@angular-devkit/schematics";
 import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
 
 
@@ -20,12 +20,12 @@ export class DeviceComponent implements OnInit {
   commands?: any
 
   color: string = '';
-  constructor(private actRoute: ActivatedRoute, private deviceService : DeviceService, private socketService: SocketDeviceService, private toastrService: NbToastrService) {
+  constructor(private actRoute: ActivatedRoute, private deviceService: DeviceService, private socketService: SocketDeviceService, private toastrService: NbToastrService) {
     this.deviceID = this.actRoute.snapshot.params['id'];
     this.getData()
   }
 
-  getData () {
+  getData() {
     this.deviceService.getDevice(this.deviceID).subscribe((data) => {
       this.Device = data!;
       this.module = this.Device.MODULE_TYPE
@@ -33,36 +33,52 @@ export class DeviceComponent implements OnInit {
     })
   }
 
-  getCommands(m:string){
+  getCommands(m: string) {
     this.deviceService.getCommands(m).subscribe(res => {
       this.commands = res
     })
   }
 
   runCommand(commnad: any) {
-    let password = prompt("Please Enter Device Password", "password"); 
-    if(password) {
-      if(password == this.Device?.PASSWORD.toString()) {
-
-        this.deviceService.sendCommand(commnad, this.Device?._id).subscribe(row =>{
-          if (row.result) {
-            this.toastrService.success("command executed");
-
+    /* VERIFICACION DE PASSWORD */
+    let password = prompt("Please Enter Device Password", "password");
+    if (password) {
+      if (password == this.Device?.PASSWORD.toString()) {
+        /* CONDICION COMANDOS DIFERENTES DE MODE_START */
+        if (commnad.COMMAND_NAME != 'MODE_START') {
+          this.deviceService.sendCommand(commnad, this.Device?._id).subscribe(row => {
+            if (row.result) {
+              this.toastrService.success("command executed");
+            } else {
+              this.toastrService.danger("command fail to execute");
+            }
+          })
+          /* CONDICION PARA COMANDO MODE_START */
+        } else {
+          if (this.Device?.DEVICE_INPUT.MODE.MANUAL_MODE === true) {
+            this.deviceService.sendCommand(commnad, this.Device?._id).subscribe(row => {
+              if (row.result) {
+                this.toastrService.success("command executed");
+              } else {
+                this.toastrService.danger("command fail to execute");
+              }
+            })
+            /* SI NO ESTA EN MODE_MANUAL HAY QUE ACTIVARLO PARA ENCENDER */
           } else {
-            this.toastrService.danger("command fail to execute");
-
+            alert('Para encender, activa primero el MODO MANUAL')
           }
+        }
 
-        })
+
       }
     }
   }
 
   getPercent(value: number, max: number) {
-    let calc = (value*100) / max;
+    let calc = (value * 100) / max;
     if (calc >= 85) {
       this.color = 'primary'
-    }else if( calc > 65 && calc >84){
+    } else if (calc > 65 && calc > 84) {
       this.color = 'warning '
     } else {
       this.color = 'danger'
@@ -134,14 +150,14 @@ export class DeviceComponent implements OnInit {
         return ''
     }
   }
-  modeStatus(key : string, val : true){
+  modeStatus(key: string, val: true) {
     if (key == 'STOP_MODE') {
       return 'badge bg-danger';
-    }else if(key == 'MANUAL_MODE'){
+    } else if (key == 'MANUAL_MODE') {
       return 'badge bg-primary';
-    }else if(key == 'TEST_MODE'){
+    } else if (key == 'TEST_MODE') {
       return 'badge bg-secondary';
-    }else if(key == 'AUTO_MODE'){
+    } else if (key == 'AUTO_MODE') {
       return 'badge bg-success';
     } else {
       return 'badge bg-primary';

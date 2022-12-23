@@ -1,7 +1,130 @@
 <div class="row" *ngIf="Device">
-  <div class="col-8">
+  <div class="col-md-4 col-sm-12">
+    <nb-card [status]="Device.STATUS?'success':'danger'">
+      <nb-card-header>{{Device.STATUS?'En linea':'Desconectado'}}</nb-card-header>
+      <nb-card-body>
+        <nb-actions size="small" *ngIf="Device.STATUS">
+          <nb-action *ngFor="let com of commands" [icon]="com.ICON"  [title]="com.COMMAND_NAME" badgeDot="true"  (click)="runCommand(com)"></nb-action>
+        </nb-actions>
+        <table class="table table-responsive">
+          <tbody>
+            <tr>
+              <td><strong>Modo</strong></td>
+              <td>
+                <div *ngFor="let row of Device.DEVICE_INPUT.MODE | keyvalue">
+                  <span *ngIf="row.value" [ngClass]="modeStatus(row.key, row.value)">{{row.key}}</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Controlador</strong></td>
+              <td [innerHtml]="controllerRunningStatus(Device.DEVICE_VALUE.CONTROLLER_RUNNING_STATUS)"></td>
+            </tr>
+            <tr>
+              <td><strong>AUTO</strong></td>
+              <td [innerHtml]="ATS(Device.DEVICE_VALUE.AUTO_RUNNING_STATUS)"></td>
+            </tr>
+            <tr>
+              <td><strong>Principal</strong></td>
+              <td [innerHtml]="PRIN(Device.DEVICE_VALUE.MAIN_STATUS)"></td>
+            </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>Informacion</nb-card-header>
+      <table class="table table-responsive">
+        <thead>
+        </thead>
+        <tbody>
+        <tr>
+          <td><strong>FECHA DE DATOS</strong></td>
+          <td>{{Device.DEVICE_VALUE.UPDATED | date: 'short'}}</td>
+        </tr>
+        <tr>
+          <td><strong>ALIAS</strong></td>
+          <td>{{Device.ALIAS}}</td>
+        </tr>
+        <tr>
+          <td><strong>ID Unico</strong></td>
+          <td>{{Device.IDENTIFIER}}</td>
+        </tr>
+        <tr>
+          <td><strong>Tipo de Modulo</strong></td>
+          <td>{{Device.MODULE_TYPE}}</td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </nb-card>
+    <div class="col-12">
+      <nb-card>
+        <nb-card-header>Alarmas</nb-card-header>
+        <nb-card-body>
+            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.GEN | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-warning">GEN-{{gen.key}}</span>
+            </ng-container>
+            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.WARNS | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-primary">WARNS-{{gen.key}}</span>
+            </ng-container>
+            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.WARNS_ALARMS | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-danger">WARNS_ALARMS-{{gen.key}}</span>
+            </ng-container>
+            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.SHUTDOWN_ALARM | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-dark">SHUTDOWN_ALARM-{{gen.key}}</span>
+            </ng-container>
+            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.ALARMS | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-warning">ALARMS-{{gen.key}}</span>
+            </ng-container>
+            <ng-container *ngFor="let gen of Device.DEVICE_INPUT.INPUT | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-warning">INPUT-{{gen.key}}</span>
+            </ng-container><ng-container *ngFor="let gen of Device.DEVICE_INPUT.OUTPUT | keyvalue">
+              <span *ngIf="gen.value" class="badge bg-warning">OUTPUT-{{gen.key}}</span>
+            </ng-container>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-12">
     <div class="col-12 row">
-      <div class="col-6">
+      <div class="col-12">
+        <nb-card>
+          <nb-card-header>Motor</nb-card-header>
+          <nb-card-body>
+             <table class="table table-responsive">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bateria</td>
+                    <td><nb-progress-bar style="width:100%" status="danger" [value]="getPercent(Device.DEVICE_VALUE.BATTERY_VOLTAGE/10, 30)" [displayValue]="false">{{Device.DEVICE_VALUE.BATTERY_VOLTAGE/10}} V</nb-progress-bar></td>
+                  </tr>
+                  <tr>
+                    <td>Velocidad</td>
+                    <td><nb-progress-bar style="width:100%" status="success" [value]="getPercent(Device.DEVICE_VALUE.SPEED, 1900)" [displayValue]="false">{{Device.DEVICE_VALUE.SPEED}} rpm</nb-progress-bar></td>
+                  </tr>
+                  <tr>
+                    <td>Presion de aceite</td>
+                    <td><nb-progress-bar style="width:100%" status="primary" [value]="getPercent(Device.DEVICE_VALUE.OIL_PREASURE, 200)" [displayValue]="false">{{Device.DEVICE_VALUE.OIL_PREASURE}} Kpa</nb-progress-bar></td>
+                  </tr>
+                  <tr>
+                    <td>Temperatura de agua</td>
+                    <td><nb-progress-bar style="width:100%" status="primary" [value]="getPercent(Device.DEVICE_VALUE.WATER_TEMP, 100)" [displayValue]="false">{{Device.DEVICE_VALUE.WATER_TEMP}} C</nb-progress-bar></td>
+                  </tr>
+                  <tr>
+                    <td>ULTIMA CONEXION</td>
+                    <td>{{Device.LAST_CON | date:'short'}}</td>
+                  </tr>
+                </tbody>
+             </table>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+    <div class="col-12 row">
+      <div class="col-md-6 col-sm-12">
         <nb-card>
           <nb-card-header>Generador</nb-card-header>
           <nb-card-body>
@@ -47,7 +170,7 @@
           </nb-card-body>
         </nb-card>
       </div>
-      <div class="col-6">
+      <div class="col-md-6 col-sm-12">
         <nb-card>
         <nb-card-header>Principal</nb-card-header>
         <nb-card-body>
@@ -93,131 +216,12 @@
         </nb-card-body>
         </nb-card>
       </div>
-      <div>
-        <nb-card>
-          <nb-card-header>General</nb-card-header>
-          <nb-card-body>
-             <table class="table table-responsive">
-                <thead>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>BATTERY_VOLTAGE</td>
-                    <td>{{Device.DEVICE_VALUE.BATTERY_VOLTAGE/10}} V</td>
-                  </tr>
-                  <tr>
-                    <td>ULTIMA CONEXION</td>
-                    <td>{{Device.LAST_CON | date:'short'}}</td>
-                  </tr>
-                </tbody>
-             </table>
-          </nb-card-body>
-        </nb-card>
-      </div>
-      <div>
-        <nb-card>
-          <nb-card-header>Alarmas</nb-card-header>
-          <nb-card-body>
-              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.GEN | keyvalue">
-                <span *ngIf="gen.value" class="badge bg-warning">GEN-{{gen.key}}</span>
-              </ng-container>
-              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.WARNS | keyvalue">
-                <span *ngIf="gen.value" class="badge bg-warning">WARNS-{{gen.key}}</span>
-              </ng-container>
-              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.WARNS_ALARMS | keyvalue">
-                <span *ngIf="gen.value" class="badge bg-warning">WARNS_ALARMS-{{gen.key}}</span>
-              </ng-container>
-              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.SHUTDOWN_ALARM | keyvalue">
-                <span *ngIf="gen.value" class="badge bg-warning">SHUTDOWN_ALARM-{{gen.key}}</span>
-              </ng-container>
-              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.ALARMS | keyvalue">
-                <span *ngIf="gen.value" class="badge bg-warning">ALARMS-{{gen.key}}</span>
-              </ng-container>
-              <ng-container *ngFor="let gen of Device.DEVICE_INPUT.INPUT | keyvalue">
-                <span *ngIf="gen.value" class="badge bg-warning">INPUT-{{gen.key}}</span>
-              </ng-container><ng-container *ngFor="let gen of Device.DEVICE_INPUT.OUTPUT | keyvalue">
-                <span *ngIf="gen.value" class="badge bg-warning">OUTPUT-{{gen.key}}</span>
-              </ng-container>
-          </nb-card-body>
-        </nb-card>
-      </div>
+      
     </div>
 
     
     
   </div>
-  <div class="col-4">
-    <nb-card [status]="Device.STATUS?'success':'danger'">
-      <nb-card-header>{{Device.STATUS?'En linea':'Desconectado'}}</nb-card-header>
-      <nb-card-body>
-        <nb-actions size="small" *ngIf="Device.STATUS">
-          <nb-action *ngFor="let com of commands" [icon]="com.ICON"  [title]="com.COMMAND_NAME" badgeDot="true" (click)="runCommand(com)"></nb-action>
-        </nb-actions>
-        <table class="table table-responsive">
-          <tbody>
-            <tr>
-              <td><strong>Modo</strong></td>
-              <td>
-                <div *ngFor="let row of Device.DEVICE_INPUT.MODE | keyvalue">
-                  <span *ngIf="row.value" [ngClass]="modeStatus(row.key, row.value)">{{row.key}}</span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Controlador</strong></td>
-              <td [innerHtml]="controllerRunningStatus(Device.DEVICE_VALUE.CONTROLLER_RUNNING_STATUS)"></td>
-            </tr>
-            <tr>
-              <td><strong>AUTO</strong></td>
-              <td [innerHtml]="ATS(Device.DEVICE_VALUE.AUTO_RUNNING_STATUS)"></td>
-            </tr>
-            <tr>
-              <td><strong>Principal</strong></td>
-              <td [innerHtml]="PRIN(Device.DEVICE_VALUE.MAIN_STATUS)"></td>
-            </tr>
-          </tbody>
-        </table>
-      </nb-card-body>
-    </nb-card>
-    <nb-card>
-      <nb-card-header>Informacion</nb-card-header>
-      <table class="table table-responsive">
-        <thead>
-        </thead>
-        <tbody>
-        <tr>
-          <td><strong>FECHA DE DATOS</strong></td>
-          <td>{{Device.DEVICE_VALUE.UPDATED | date: 'long'}}</td>
-        </tr>
-        <tr>
-          <td><strong>ALIAS</strong></td>
-          <td>{{Device.ALIAS}}</td>
-        </tr>
-        <tr>
-          <td><strong>ID Unico</strong></td>
-          <td>{{Device.IDENTIFIER}}</td>
-        </tr>
-        <tr>
-          <td><strong>_id</strong></td>
-          <td>{{Device._id}}</td>
-        </tr>
-        <tr>
-          <td><strong>Tipo de Modulo</strong></td>
-          <td>{{Device.MODULE_TYPE}}</td>
-        </tr>
-        <tr>
-          <td><strong>Puerto</strong></td>
-          <td>{{Device.MODULE_PORT}}</td>
-        </tr>
-        <tr>
-          <td><strong>Baud</strong></td>
-          <td>{{Device.MODULE_BAUD}}</td>
-        </tr>
 
-
-        </tbody>
-      </table>
-    </nb-card>
-  </div>
 
 </div>

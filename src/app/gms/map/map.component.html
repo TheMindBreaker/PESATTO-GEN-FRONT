@@ -6,7 +6,7 @@
         <h6 class="m-2">Dispositivos</h6>
         <nb-list *ngIf="items">
           <nb-list-item *ngFor="let device of items" >
-            <nb-user [name]="device.id" [color]="device.color" [title]="device.lastup"  [routerLink]="['../../gms/device/'+device.realId]">
+            <nb-user [name]="device.id" [color]="device.color" showInitials="false" [title]="device.lastup"  [routerLink]="['../../gms/device/'+device.realId]">
             </nb-user>
           </nb-list-item>
         </nb-list>

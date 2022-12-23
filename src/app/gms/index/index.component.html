@@ -1,1 +1,78 @@
-<p>index works!</p>
+<div class="row">
+    <div class="col-3">
+        <nb-card size="medium">
+            <nb-card-header>
+                <h6>Generadores</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <nb-list>
+                    <nb-list-item *ngFor="let device of devices">
+                        <nb-user shape="round" [name]="device.ALIAS" [routerLink]="['../device/'+device._id]"
+                            showInitials="false" [title]="device.LAST_IP" [color]="device.STATUS?'green':'red'">
+                        </nb-user>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-6">
+        <nb-card size="medium">
+            <nb-card-header>
+                <h6>Crear Genereador</h6>
+            </nb-card-header>
+            <nb-card-body>
+
+
+                <nb-stepper #stepper [linear]="linearMode">
+
+                    <nb-step label="Inicio" >
+                        <div class="text-center">
+                            <h4>Registrar un nuevo generador</h4>
+                            <button nbButton nbStepperNext>Comenzar</button>
+                        </div>
+                    </nb-step>
+
+                    <nb-step [stepControl]="firstForm" label="Datos">
+                        <form [formGroup]="firstForm" class="step-container" class="step-container" >
+                            <label for="" class="form-label">Alias</label>
+                            <div class="input-group mb-3 col-12">
+                                <input 
+                                    type="text" 
+                                    placeholder="Escribe el alias" 
+                                    class="form-control" 
+                                    formControlName="alias"
+                                    nbInput  
+                                    [status]="firstForm.controls['alias'].invalid ? 'danger' : 'basic'">
+                            </div>
+                            <button nbButton [disabled]="firstForm.invalid" [status]="firstForm.invalid ? 'danger' : 'primary'"nbStepperNext>Siguiente</button>
+                        </form>
+                    </nb-step>
+
+                    <nb-step [stepControl]="secondForm" label="Finalizar">
+                        <form [formGroup]="secondForm" class="step-container">
+                            <label for="" class="form-label">Contraseña</label>
+                            <div class="input-group mb-3">
+                                <input 
+                                    type="password" 
+                                    placeholder="password" 
+                                    class="form-control" 
+                                    formControlName="password"
+                                    required nbInput
+                                    [status]="secondForm.controls['password'].invalid ? 'danger' : 'basic'">
+                            </div>
+                            <button nbButton nbStepperNext [disabled]="secondForm.invalid" [status]="secondForm.invalid ? 'danger' : 'basic'" (click)="onSubmit()">Siguiente</button>
+                        </form>
+                    </nb-step>
+
+                    <nb-step [hidden]="true">
+                        <div class="step-container text-center">
+                            <h3>¡Generador creado!</h3>
+                            <button nbButton (click)="stepper.reset()" status="success">Agregar otro</button>
+                        </div>
+                    </nb-step>
+                </nb-stepper>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

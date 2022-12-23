@@ -25,7 +25,7 @@
                 <td>{{item.devices}}</td>
                 <td>{{item.role}}</td>
                 <td>
-                    <button nbButton shape="round" (click)="openWindow()" size="medium" status="danger" class="m-1"><i class="bi bi-trash"></i></button>
+                    <button nbButton shape="round" (click)="deleteUser(item._id)" size="medium" status="danger" class="m-1"><i class="bi bi-trash"></i></button>
                     <a [routerLink]="['/gms/adminUser/'+item._id]" nbButton shape="round" size="medium" status="info" class="m-1"><i class="bi bi-eye-fill"></i></a>
                 </td>
               </tr>
