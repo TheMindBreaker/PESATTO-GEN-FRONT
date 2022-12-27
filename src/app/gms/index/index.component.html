@@ -1,26 +1,32 @@
 <div class="row">
-    <div class="col-3">
-        <nb-card size="medium">
-            <nb-card-header>
-                <h6>Generadores</h6>
-            </nb-card-header>
-            <nb-card-body>
-                <nb-list>
-                    <nb-list-item *ngFor="let device of devices">
-                        <nb-user shape="round" [name]="device.ALIAS" [routerLink]="['../device/'+device._id]"
-                            showInitials="false" [title]="device.LAST_IP" [color]="device.STATUS?'green':'red'">
-                        </nb-user>
-                    </nb-list-item>
-                </nb-list>
-            </nb-card-body>
-        </nb-card>
+    <div class="col-md-6 col-sm-12 mb-3">
+        <div class="row">
+            <nb-accordion>
+                <nb-accordion-item *ngFor="let item of devices">
+                  <nb-accordion-item-header>
+                    {{item.ALIAS}}
+                  </nb-accordion-item-header>
+                  <nb-accordion-item-body>
+                   <div><strong>Estatus: </strong>{{item.STATUS==true?'Activo':'Inactivo'}}</div> 
+                   <div *ngIf="item.DEVICE_INPUT.MODE.AUTO_MODE == true"><strong>Modo: </strong>AUTOMATICO</div>
+                   <div *ngIf="item.DEVICE_INPUT.MODE.MANUAL_MODE == true"><strong>Modo: </strong>MANUAL</div>
+                   <div *ngIf="item.DEVICE_INPUT.MODE.STOP_MODE == true"><strong>Modo: </strong>STOP</div>
+                   <div *ngIf="item.DEVICE_INPUT.MODE.TEST_MODE == true"><strong>Modo: </strong>TEST</div>
+                   <div><strong>Ultima conexión: </strong>{{item.LAST_CON| date:'medium'}}</div>
+                   <div><strong>Identificador:</strong> {{item.IDENTIFIER}}</div>
+
+
+
+                   <div></div>
+                  </nb-accordion-item-body>
+                </nb-accordion-item>
+              </nb-accordion>
+        </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-6 col-sm-12">
         <nb-card size="medium">
-            <nb-card-header>
-                <h6>Crear Genereador</h6>
-            </nb-card-header>
+            
             <nb-card-body>
 
 
@@ -42,8 +48,17 @@
                                     placeholder="Escribe el alias" 
                                     class="form-control" 
                                     formControlName="alias"
-                                    nbInput  
-                                    [status]="firstForm.controls['alias'].invalid ? 'danger' : 'basic'">
+                                   >
+                            </div>
+                            <label for="" class="form-label">Puerto</label>
+                            <div class="input-group mb-3 col-12">
+                                <select formControlName="port" class="form-control">
+                                    <option value="" selected>SELECCIONA</option>
+                                    <option value="1">LINK</option>
+                                    <option value="2">RS485</option>
+                                    <option value="3">RS232</option>
+                                    <option value="4">UDS</option>
+                                </select>
                             </div>
                             <button nbButton [disabled]="firstForm.invalid" [status]="firstForm.invalid ? 'danger' : 'primary'"nbStepperNext>Siguiente</button>
                         </form>
@@ -51,17 +66,18 @@
 
                     <nb-step [stepControl]="secondForm" label="Finalizar">
                         <form [formGroup]="secondForm" class="step-container">
-                            <label for="" class="form-label">Contraseña</label>
+                            <label for="" class="form-label">Tipo de modulo</label>
                             <div class="input-group mb-3">
-                                <input 
-                                    type="password" 
-                                    placeholder="password" 
-                                    class="form-control" 
-                                    formControlName="password"
-                                    required nbInput
-                                    [status]="secondForm.controls['password'].invalid ? 'danger' : 'basic'">
+                                <select formControlName="type" class="form-control">
+                                    <option value="" selected>SELECCIONA</option>
+                                    <option value="HGM6120">HGM6120</option>
+                                </select>
                             </div>
-                            <button nbButton nbStepperNext [disabled]="secondForm.invalid" [status]="secondForm.invalid ? 'danger' : 'basic'" (click)="onSubmit()">Siguiente</button>
+                            <label for="" class="form-label">Identificador</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" formControlName="identifier" placeholder="Escribe el identificador">
+                            </div>
+                            <button nbButton nbStepperNext [disabled]="secondForm.invalid" [status]="secondForm.invalid ? 'danger' : 'primary'" (click)="onSubmit()">Siguiente</button>
                         </form>
                     </nb-step>
 

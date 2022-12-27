@@ -62,7 +62,7 @@ export class DeviceService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
-    return this.http.post<any>(environment.local+'create/device', data, {
+    return this.http.post<any>(environment.apiUrl+'/create/device', data, {
       headers: headers
     })
   }

@@ -17,6 +17,7 @@ export class UserComponent implements OnInit {
   listDevice: any = [];
   idUser? : string;
   tags: Set<string> = new Set<string>();
+  edit: boolean = false;
   
 
 

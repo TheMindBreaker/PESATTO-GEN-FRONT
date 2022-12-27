@@ -18,8 +18,11 @@ export class DeviceComponent implements OnInit {
   Device?: Device
   module?: string
   commands?: any
-
+  loading = false;
   color: string = '';
+  modeOld: any;
+  modeNew: any;
+  mode: any;
   constructor(private actRoute: ActivatedRoute, private deviceService: DeviceService, private socketService: SocketDeviceService, private toastrService: NbToastrService) {
     this.deviceID = this.actRoute.snapshot.params['id'];
     this.getData()
@@ -28,8 +31,10 @@ export class DeviceComponent implements OnInit {
   getData() {
     this.deviceService.getDevice(this.deviceID).subscribe((data) => {
       this.Device = data!;
+      this.modeOld = this.Device.DEVICE_INPUT.MODE
       this.module = this.Device.MODULE_TYPE
       this.getCommands(data.MODULE_TYPE)
+
     })
   }
 
@@ -41,16 +46,17 @@ export class DeviceComponent implements OnInit {
 
   runCommand(commnad: any) {
     /* VERIFICACION DE PASSWORD */
-    let password = prompt("Please Enter Device Password", "password");
+    let password = prompt("Por favor digite la contraseña del dispositivo", "");
     if (password) {
       if (password == this.Device?.PASSWORD.toString()) {
         /* CONDICION COMANDOS DIFERENTES DE MODE_START */
         if (commnad.COMMAND_NAME != 'MODE_START') {
           this.deviceService.sendCommand(commnad, this.Device?._id).subscribe(row => {
             if (row.result) {
-              this.toastrService.success("command executed");
+              this.toastrService.success("Ejecutando comando");
+              this.loading = true;
             } else {
-              this.toastrService.danger("command fail to execute");
+              this.toastrService.danger("Error en la ejecución del comando");
             }
           })
           /* CONDICION PARA COMANDO MODE_START */
@@ -58,19 +64,40 @@ export class DeviceComponent implements OnInit {
           if (this.Device?.DEVICE_INPUT.MODE.MANUAL_MODE === true) {
             this.deviceService.sendCommand(commnad, this.Device?._id).subscribe(row => {
               if (row.result) {
-                this.toastrService.success("command executed");
+                this.toastrService.success("Ejecutando comando");
               } else {
-                this.toastrService.danger("command fail to execute");
+                this.toastrService.danger("Error en la ejecución del comando");
               }
             })
-            /* SI NO ESTA EN MODE_MANUAL HAY QUE ACTIVARLO PARA ENCENDER */
+            /* SI NO ESTA EN MODE_MANUAL HAY QUE ACTIVARLO PARA MODE_START */
           } else {
             alert('Para encender, activa primero el MODO MANUAL')
           }
         }
-
+      }else{
+        this.toastrService.danger("Constraseña incorrecta");
 
       }
+    }
+  }
+
+  modeLoader(modeOld: any, modeNew: any){
+    let old = ''
+    let modenew = ''
+    for(let value in modeOld){
+      if (modeOld[value]) {
+        old = value
+      }
+    }
+    for(let value in modeNew){
+      if (modeNew[value]) {
+        modenew = value
+      }
+    }
+
+    if (modenew != old) {
+      this.getData()
+      this.loading = false
     }
   }
 
@@ -90,12 +117,12 @@ export class DeviceComponent implements OnInit {
     this.socketService.getNewMessage(this.deviceID).subscribe(row => {
       try {
         this.Device = JSON.parse(row)
+        this.modeLoader(this.modeOld, this.Device?.DEVICE_INPUT.MODE)
       } catch (e) {
         console.log(e);
-
       }
-
     })
+
   }
 
 
@@ -163,6 +190,7 @@ export class DeviceComponent implements OnInit {
       return 'badge bg-primary';
     }
   }
+  
 
 
 

@@ -46,14 +46,14 @@ export class MapComponent implements OnInit {
             realId: row._id,
             id: row.ALIAS,
             color: 'green',
-            lastup: ''
+            lastup: row.LAST_UPDATE
           });
         }else{
           this.items.push({
             realId: row._id,
             id:row.ALIAS,
             color: 'red',
-            lastup: ''
+            lastup: row.LAST_UPDATE
           })
         }
 

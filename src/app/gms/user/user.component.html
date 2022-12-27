@@ -2,7 +2,7 @@
     <nb-card-body>
         <div class="row">
             <div class="col pt-2">
-                <h6>Agregar usuario</h6>
+                <h6>Usuarios</h6>
             </div>
             <div class="col text-end">
                 <a [routerLink]="['/gms/users']" class="btn btn-secondary"><i class="bi bi-arrow-left"></i></a>
@@ -109,6 +109,7 @@
 </div>
 
 <ng-template #actualizar>
+<div>
     <form [formGroup]="user" (ngSubmit)="onSubmitUpdate(user.value)">
         <div class="row mb-2">
             <div class="col">
@@ -164,5 +165,7 @@
             <button class="btn btn-primary" [disabled]="user.invalid">Actualizar</button>
         </div>
     </form>
+</div>
+
 
 </ng-template>

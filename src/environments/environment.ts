@@ -10,7 +10,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://gms.pesatto.com",
-  socketUrl: "https://socket.pesatto.com",
+  apiUrl: "http://odoo.construtec.mx:5002",
+  socketUrl: "http://odoo.construtec.mx:5001",
   local: "http://localhost:5000/"
 };

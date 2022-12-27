@@ -1,6 +1,10 @@
 <div class="row" *ngIf="Device">
   <div class="col-md-4 col-sm-12">
-    <nb-card [status]="Device.STATUS?'success':'danger'">
+    <nb-card [status]="Device.STATUS?'success':'danger'"
+      [nbSpinner]="loading" 
+      nbSpinnerStatus="danger"
+      nbSpinnerSize="large"
+      nbSpinnerMessage="">
       <nb-card-header>{{Device.STATUS?'En linea':'Desconectado'}}</nb-card-header>
       <nb-card-body>
         <nb-actions size="small" *ngIf="Device.STATUS">
@@ -12,7 +16,7 @@
               <td><strong>Modo</strong></td>
               <td>
                 <div *ngFor="let row of Device.DEVICE_INPUT.MODE | keyvalue">
-                  <span *ngIf="row.value" [ngClass]="modeStatus(row.key, row.value)">{{row.key}}</span>
+                  <span *ngIf="row.value"  [ngClass]="modeStatus(row.key, row.value)">{{row.key}}</span>
                 </div>
               </td>
             </tr>

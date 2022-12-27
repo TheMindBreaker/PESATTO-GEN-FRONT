@@ -3,6 +3,7 @@ import { DeviceBasic } from './../../model/device_basic';
 import { DeviceService } from './../../service/device.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Device } from 'src/app/model/device';
 
 @Component({
   selector: 'app-index',
@@ -11,11 +12,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class IndexComponent implements OnInit {
 
-  devices: Array<DeviceBasic> = []
+  devices: Array<Device> = []
   linearMode = true;
   firstForm!: FormGroup;
   secondForm!: FormGroup;
   inputs: any = {}
+  mode:any
 
 
   constructor(private service: UsersService, private formBuild : FormBuilder, private serviceDevice: DeviceService) { }
@@ -23,6 +25,7 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.service.getDevices().subscribe(res => {
       this.devices = res
+      
     })
     this.forms()
   }
@@ -30,10 +33,14 @@ export class IndexComponent implements OnInit {
   forms(){
     this.firstForm = this.formBuild.group({
       alias: ['', [Validators.required, Validators.minLength(2)]],
+      port: ['', [Validators.required, Validators.minLength(1)]],
+
       
     })
     this.secondForm = this.formBuild.group({
-      password: ['', [Validators.required]]
+      type: [{value:'HGM6120', disabled:false},[Validators.required]],
+      identifier: [{value:'', disabled:false},[Validators.required]]
+
       
     })
   }
@@ -42,9 +49,10 @@ export class IndexComponent implements OnInit {
 
     this.inputs = {
       alias: this.firstForm.controls['alias'].value,
-      password: this.secondForm.controls['password'].value
+      type: this.secondForm.controls['type'].value,
+      port: this.firstForm.controls['port'].value
     }
-
+    console.log(this.inputs)
     this.serviceDevice.createDevice(this.inputs).subscribe(res => {
       console.log(res)
 

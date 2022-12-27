@@ -26,7 +26,7 @@ export class UsersService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
-    return this.http.get<[User]>(environment.local+'list/users',{
+    return this.http.get<[User]>(environment.apiUrl+'/list/users',{
       headers: this.headers
     })
   }
@@ -37,7 +37,7 @@ export class UsersService {
       'Authorization': `Bearer ${this.token}`
     });
 
-    return this.http.get<[any]>(environment.local+'list/devices',{
+    return this.http.get<[any]>(environment.apiUrl+'/list/devices',{
       headers:this.headers
     })
   }
@@ -47,7 +47,7 @@ export class UsersService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
-    return this.http.post(environment.local+'new/user',form, {
+    return this.http.post(environment.apiUrl+'/new/user',form, {
       headers:this.headers
     })
   }
@@ -57,7 +57,7 @@ export class UsersService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
-    return this.http.get(environment.local+'find/user/'+id, {
+    return this.http.get(environment.apiUrl+'/find/user/'+id, {
       headers:this.headers
     })
   }
@@ -67,7 +67,7 @@ export class UsersService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
-    return this.http.put<any>(environment.local+'update/user/'+id, form, {
+    return this.http.put<any>(environment.apiUrl+'/update/user/'+id, form, {
       headers:this.headers
     })
   }
@@ -77,7 +77,7 @@ export class UsersService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
-    return this.http.delete(environment.local+'delete/user/'+id, {
+    return this.http.delete(environment.apiUrl+'/delete/user/'+id, {
       headers:this.headers
     })
   }

@@ -1,24 +1,24 @@
 <div class="card" status="info" style="padding: 0">
-
   <div class="card-body" style="padding:0">
     <div class="row">
-      <div class="col-2">
+      <div class="col-md-2 col-sm-12">
         <h6 class="m-2">Dispositivos</h6>
         <nb-list *ngIf="items">
-          <nb-list-item *ngFor="let device of items" >
-            <nb-user [name]="device.id" [color]="device.color" showInitials="false" [title]="device.lastup"  [routerLink]="['../../gms/device/'+device.realId]">
+          <nb-list-item *ngFor="let device of items">
+            <nb-user 
+              size="small" 
+              [name]="device.id" 
+              [color]="device.color" 
+              showInitials="false" 
+              [title]="device.lastup"
+              [routerLink]="['../../gms/device/'+device.realId]">
             </nb-user>
           </nb-list-item>
         </nb-list>
       </div>
-      <div class="col-10">
+      <div class="col-md-10 col-sm-12">
         <div class="map-container" leaflet [leafletOptions]="options" (leafletMapReady)="map_ready($event)"></div>
       </div>
     </div>
   </div>
-
-
-
-
-
 </div>
